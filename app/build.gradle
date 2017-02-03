@@ -1,0 +1,75 @@
+apply plugin: 'com.android.application'
+apply plugin: 'android-apt'
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion "25.0.1"
+
+    defaultConfig {
+        applicationId "com.meatshop"
+        minSdkVersion 21
+        targetSdkVersion 25
+        versionCode 1
+        versionName "1.0"
+
+        multiDexEnabled true
+    }
+    buildTypes {
+        debug {
+            buildConfigField "String", "UNSPLASH_BASE_URL", "\"https://source.unsplash.com/500x500/?/\""
+            buildConfigField "String", "TWITTER_BASE_URL", "\"https://api.twitter.com/\""
+            buildConfigField "String", "TWITTER_API_CREDENTIALS", "\"MKWlv6jApby5fGEllLKwtQuli:WShloOxQb7ZWPdLy0aNERtzrM2UG5Hx1pNOS8vRqSc5yRgW5PU\""
+            buildConfigField "String", "TWITTER_AUTH_EP", "\"/oauth2/token\""
+            buildConfigField "String", "TWITTER_SEARCH_EP", "\"/1.1/search/tweets.json\""
+            buildConfigField "String", "GRANT_TYPE", "\"grant_type\""
+            buildConfigField "String", "QUERY_PARAM", "\"q\""
+            buildConfigField "String", "CLIENT_CREDENTIALS", "\"client_credentials\""
+            buildConfigField "String", "TWITTER_URL", "\"http://www.twitter.com\""
+            buildConfigField "String", "SELLS_MEAT_STATE", "\"sellsMeat\""
+            buildConfigField "String", "TWENTY_FOUR_H_STATE", "\"24h\""
+            buildConfigField "String", "FAMILY_FRIENDLY_STATE", "\"family_friendly\""
+            buildConfigField "String", "TAKE_AWAY_STATE", "\"take_away\""
+            buildConfigField "String", "TWEET_STATUS_LIST", "\"tweet_list\""
+        }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+            buildConfigField "String", "UNSPLASH_BASE_URL", "\"https://source.unsplash.com/500x500/?/\""
+            buildConfigField "String", "TWITTER_BASE_URL", "\"https://api.twitter.com/\""
+            buildConfigField "String", "TWITTER_API_CREDENTIALS", "\"MKWlv6jApby5fGEllLKwtQuli:WShloOxQb7ZWPdLy0aNERtzrM2UG5Hx1pNOS8vRqSc5yRgW5PU\""
+            buildConfigField "String", "TWITTER_AUTH_EP", "\"/oauth2/token\""
+            buildConfigField "String", "TWITTER_SEARCH_EP", "\"/1.1/search/tweets.json\""
+            buildConfigField "String", "GRANT_TYPE", "\"grant_type\""
+            buildConfigField "String", "QUERY_PARAM", "\"q\""
+            buildConfigField "String", "CLIENT_CREDENTIALS", "\"client_credentials\""
+            buildConfigField "String", "TWITTER_URL", "\"http://www.twitter.com\""
+            buildConfigField "String", "SELLS_MEAT_STATE", "\"sellsMeat\""
+            buildConfigField "String", "TWENTY_FOUR_H_STATE", "\"24h\""
+            buildConfigField "String", "FAMILY_FRIENDLY_STATE", "\"family_friendly\""
+            buildConfigField "String", "TAKE_AWAY_STATE", "\"take_away\""
+            buildConfigField "String", "TWEET_STATUS_LIST", "\"tweet_list\""
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    testCompile 'junit:junit:4.12'
+
+    def version = '25.1.1'
+    compile "com.android.support:appcompat-v7:${version}"
+    compile "com.android.support:design:${version}"
+    compile "com.android.support:support-v4:${version}"
+    compile "com.android.support:cardview-v7:${version}"
+    compile "com.android.support:recyclerview-v7:${version}"
+
+    apt 'com.jakewharton:butterknife-compiler:8.4.0'
+
+    compile 'com.jakewharton:butterknife:8.4.0'
+    compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'com.google.android.gms:play-services:10.0.1'
+    compile 'com.squareup.retrofit2:retrofit:2.1.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.1.0'
+    compile 'com.android.support:support-v4:25.1.1'
+}

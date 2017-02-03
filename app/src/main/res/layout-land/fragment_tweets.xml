@@ -1,0 +1,46 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.TweetsFragment">
+
+    <TextView
+        android:id="@+id/tweets_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tweets_about_us"
+        android:layout_centerHorizontal="true"
+        style="@android:style/TextAppearance.Material.Title"
+        android:layout_marginTop="20dp"/>
+
+    <LinearLayout
+        android:id="@+id/view_flipper_control_layout"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:layout_toEndOf="@+id/tweets_title"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp">
+
+        <Button
+            android:id="@+id/play"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@android:drawable/ic_media_play" />
+
+        <Button
+            android:id="@+id/stop"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@android:drawable/ic_media_pause" />
+    </LinearLayout>
+
+    <ViewFlipper
+        android:id="@+id/view_flipper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/view_flipper_control_layout"
+        android:layout_marginTop="10dp"/>
+        />
+</RelativeLayout>

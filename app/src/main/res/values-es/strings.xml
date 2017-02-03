@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Meat Shop</string>
+    <string name="intro_title">PRESENTACIÓN</string>
+    <string name="intro_delivery_title">Reparto a domicilio</string>
+    <string name="intro_traditional_cut_title">Corte tradicional</string>
+</resources>
