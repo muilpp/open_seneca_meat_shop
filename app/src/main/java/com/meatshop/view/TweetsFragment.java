@@ -29,25 +29,33 @@ public class TweetsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_tweets, container, false);
 
-        if (savedInstanceState != null)
+        int viewFlipperIndex = 0;
+        if (savedInstanceState != null) {
             statusList = savedInstanceState.getParcelableArrayList(BuildConfig.TWEET_STATUS_LIST);
+            viewFlipperIndex = savedInstanceState.getInt(BuildConfig.VIEW_FLIPPER_INDEX);
+        }
 
-        initViews(rootView);
+        initViews(rootView, viewFlipperIndex);
 
         return rootView;
     }
 
-    private void initViews(View rootView) {
+    private void initViews(View rootView, int viewFlipperIndex) {
         viewFlipper = (ViewFlipper) rootView.findViewById(R.id.view_flipper);
-        ViewFlipperHelper.init(viewFlipper, getActivity(), rootView.findViewById(R.id.play), rootView.findViewById(R.id.stop));
+        ViewFlipperHelper.init(viewFlipper, rootView.findViewById(R.id.play), rootView.findViewById(R.id.stop));
 
-        TwitterService twitterService = new TwitterServiceImpl(viewFlipper, getActivity(), statusList);
+        TwitterService twitterService = new TwitterServiceImpl(viewFlipper, statusList);
         twitterService.search();
+
+        viewFlipper.setDisplayedChild(viewFlipperIndex);
     }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putParcelableArrayList(BuildConfig.TWEET_STATUS_LIST, statusList);
+
+        if (viewFlipper != null)
+            outState.putInt(BuildConfig.VIEW_FLIPPER_INDEX, viewFlipper.getDisplayedChild());
     }
 }

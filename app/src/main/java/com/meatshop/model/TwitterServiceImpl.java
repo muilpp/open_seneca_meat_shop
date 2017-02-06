@@ -1,6 +1,5 @@
 package com.meatshop.model;
 
-import android.app.Activity;
 import android.util.Log;
 import android.widget.ViewFlipper;
 
@@ -19,12 +18,10 @@ public class TwitterServiceImpl implements TwitterService {
     private final static String TAG = TwitterServiceImpl.class.getName();
     private String twitterBearer;
     private ViewFlipper viewFlipper;
-    private Activity activity;
     private List<TwitterStatus> statusList;
 
-    public TwitterServiceImpl (ViewFlipper viewFlipper, Activity activity, List<TwitterStatus> statusList) {
+    public TwitterServiceImpl (ViewFlipper viewFlipper, List<TwitterStatus> statusList) {
         this.viewFlipper = viewFlipper;
-        this.activity = activity;
         this.statusList = statusList;
     }
 
@@ -58,7 +55,7 @@ public class TwitterServiceImpl implements TwitterService {
     public void search() {
         //statusList is filled from the saved instance, no need to call the API
         if (!statusList.isEmpty()) {
-            ViewFlipperHelper.addTwitterStatus(viewFlipper, statusList, activity);
+            ViewFlipperHelper.addTwitterStatus(viewFlipper, statusList);
             return;
         }
 
@@ -75,7 +72,7 @@ public class TwitterServiceImpl implements TwitterService {
                     try {
                         TwitterStatusDTO twitterStatusDTO = new Gson().fromJson(response.body().string(), TwitterStatusDTO.class);
                         statusList.addAll(twitterStatusDTO.getStatusList());
-                        ViewFlipperHelper.addTwitterStatus(viewFlipper, twitterStatusDTO.getStatusList(), activity);
+                        ViewFlipperHelper.addTwitterStatus(viewFlipper, twitterStatusDTO.getStatusList());
                     } catch (IOException e) {
                         Log.e(TAG, e.getMessage(), e);
                     }

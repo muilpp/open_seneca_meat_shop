@@ -10,7 +10,6 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -33,20 +32,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        initViews();
         initNavDrawer();
 
-        FragmentManager fragmentManager = getFragmentManager();
-        final int fragmentCount = fragmentManager.getBackStackEntryCount();
-
-        if (fragmentCount > 0) {
-            String tag = fragmentManager.getBackStackEntryAt(fragmentCount - 1).getName();
-            Log.i(TAG, "Obro fragment -> " + tag);
-            fragmentManager.beginTransaction()
-                    .replace(R.id.main_content, fragmentManager.findFragmentByTag(tag), tag)
-                    .addToBackStack(tag)
-                    .commit();
-        }
+        //add home fragment only the first time the activity is created
+        if (savedInstanceState == null)
+            initViews();
     }
 
     @SuppressWarnings("deprecation")
@@ -83,7 +73,6 @@ public class MainActivity extends AppCompatActivity {
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setHomeButtonEnabled(true);
         }
 
         mNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {

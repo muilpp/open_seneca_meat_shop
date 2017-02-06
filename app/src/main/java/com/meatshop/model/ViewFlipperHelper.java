@@ -1,6 +1,5 @@
 package com.meatshop.model;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -21,7 +20,7 @@ public class ViewFlipperHelper {
     private final static String TAG = ViewFlipperHelper.class.getName();
     private static float initialX;
 
-    public static ViewFlipper init(final ViewFlipper viewFlipper, final Activity activity, View startView, View stopView) {
+    public static ViewFlipper init(final ViewFlipper viewFlipper, View startView, View stopView) {
         viewFlipper.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
@@ -35,8 +34,8 @@ public class ViewFlipperHelper {
                         if (initialX < currentX) {
                             if (viewFlipper.getDisplayedChild() == 0)
                                 break;
-                            viewFlipper.setInAnimation(activity, R.anim.in_from_left);
-                            viewFlipper.setOutAnimation(activity, R.anim.out_from_right);
+                            viewFlipper.setInAnimation(viewFlipper.getContext(), R.anim.in_from_left);
+                            viewFlipper.setOutAnimation(viewFlipper.getContext(), R.anim.out_from_right);
                             viewFlipper.showPrevious();
                         }
 
@@ -44,8 +43,8 @@ public class ViewFlipperHelper {
                         if (initialX > currentX) {
                             if (viewFlipper.getDisplayedChild() == viewFlipper.getChildCount()-1)
                                 break;
-                            viewFlipper.setOutAnimation(activity, R.anim.out_from_left);
-                            viewFlipper.setInAnimation(activity, R.anim.in_from_right);
+                            viewFlipper.setOutAnimation(viewFlipper.getContext(), R.anim.out_from_left);
+                            viewFlipper.setInAnimation(viewFlipper.getContext(), R.anim.in_from_right);
                             viewFlipper.showNext();
                         }
                         break;
@@ -73,9 +72,9 @@ public class ViewFlipperHelper {
         return viewFlipper;
     }
 
-    public static void addTwitterStatus(final ViewFlipper viewFlipper, List<TwitterStatus> statusList, final Activity activity) {
+    public static void addTwitterStatus(final ViewFlipper viewFlipper, List<TwitterStatus> statusList) {
 
-        final LayoutInflater inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        final LayoutInflater inflater = (LayoutInflater) viewFlipper.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         for (final TwitterStatus status : statusList) {
             final View view = inflater.inflate(R.layout.tweet_item_view, null);
@@ -90,7 +89,7 @@ public class ViewFlipperHelper {
                 @Override
                 public void onClick(View view) {
                     Intent tweetIntent= new Intent(Intent.ACTION_VIEW, Uri.parse(BuildConfig.TWITTER_URL+"/"+status.getUser().getScreenName()));
-                    activity.startActivity(tweetIntent);
+                    viewFlipper.getContext().startActivity(tweetIntent);
                 }
             });
 

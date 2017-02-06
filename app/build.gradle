@@ -30,6 +30,7 @@ android {
             buildConfigField "String", "FAMILY_FRIENDLY_STATE", "\"family_friendly\""
             buildConfigField "String", "TAKE_AWAY_STATE", "\"take_away\""
             buildConfigField "String", "TWEET_STATUS_LIST", "\"tweet_list\""
+            buildConfigField "String", "VIEW_FLIPPER_INDEX", "\"view_flipper_index\""
         }
         release {
             minifyEnabled false
@@ -49,6 +50,7 @@ android {
             buildConfigField "String", "FAMILY_FRIENDLY_STATE", "\"family_friendly\""
             buildConfigField "String", "TAKE_AWAY_STATE", "\"take_away\""
             buildConfigField "String", "TWEET_STATUS_LIST", "\"tweet_list\""
+            buildConfigField "String", "VIEW_FLIPPER_INDEX", "\"view_flipper_index\""
         }
     }
 }
